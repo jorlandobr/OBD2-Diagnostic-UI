@@ -5,15 +5,14 @@
 ![GitHub License](https://img.shields.io/github/license/muki01/OBD2-Diagnostic-UI?style=flat)
 ![GitHub last commit](https://img.shields.io/github/last-commit/muki01/OBD2-Diagnostic-UI)
 
-Web UI for real-time vehicle diagnostics over OBD-II.
+OBD2-Diagnostic-UI is a lightweight, high-performance web interface designed for real-time vehicle diagnostics.
+It serves as a protocol-agnostic frontend optimized for embedded systems like ESP32 and STM32.
 
-A protocol-agnostic frontend designed for embedded OBD2 diagnostic systems.
-
+## 📱 Interface Preview
 <img width=90% src="https://github.com/user-attachments/assets/5a3e0540-b56d-4c3a-a0bf-8c1affcda00c" />
 <img width=90% src="https://github.com/user-attachments/assets/8544df16-cf62-4a80-8f19-cbd0daadfb51" />
 
-## Features
-
+## ✨ Key Features
 - Real-time PID monitoring
 - Diagnostic Trouble Code (DTC) visualization
 - Freeze frame data display
@@ -22,31 +21,31 @@ A protocol-agnostic frontend designed for embedded OBD2 diagnostic systems.
 - Optimized for embedded HTTP servers (ESP32, STM32, etc.)
 - Production-ready static asset build (minified + gzip)
 
+## 🛠 Tech Stack
+- Frontend: HTML5, CSS3, JavaScript (ES6+)
+- Communication: WebSockets & REST API
+- Optimization: Minified static assets for embedded storage (SPIFFS/LittleFS)
+
 ## Architecture
 
 The UI is designed to operate independently of the underlying physical and transport layers.
 
-[ Physical Layer ]   → K-Line / CAN  
-[ Protocol Layer ]   → ISO 9141-2 / ISO 14230 / ISO 15765-4  
-[ Diagnostic Layer ] → OBD-II PIDs / DTC  
-[ API Layer ]        → REST / WebSocket (JSON)  
-[ UI Layer ]         → OBD2-Diagnostic-UI  
+| Layer            | Responsibility                       |
+|------------------|--------------------------------------|
+| Physical Layer   | K-Line / CAN                         |
+| Protocol Layer   | ISO 9141-2 / ISO 14230 / ISO 15765-4 |
+| Diagnostic Layer | OBD-II PIDs / DTC                    |
+| API Layer        | REST / WebSocket (JSON)              |
+| UI Layer         | OBD2-Diagnostic-UI                   |
+
 
 The frontend communicates only with the API layer and remains protocol-agnostic.
 
-## API Contract
+## 📡 API Contract
+#### WebSocket Sample Payload
+The frontend expects JSON data in the following format:
 
-### REST
-
-GET /api/protocol  
-GET /api/live  
-GET /api/dtc  
-
-### WebSocket
-
-WS /ws/live
-
-```cpp
+```json
 {
   "protocol": "ISO15765-4",
   "timestamp": 1700000000,
