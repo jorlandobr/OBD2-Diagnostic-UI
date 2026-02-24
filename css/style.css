@@ -11,11 +11,38 @@
     --text-main: #2c323f;
     --text-sec: #808b9c;
     --border-color: #edf1f4;
-    --card-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
-    --card-shadow-hover: 0 12px 32px rgba(149, 157, 165, 0.15);
-    --btn-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+    --card-shadow: 0 0 10px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
     --border-rad: 20px;
     --app-bar-height: 64px;
+    --transition-speed: 0.3s;
+
+    /* Semantic Colors */
+    --clr-blue: #007aff;
+    --clr-red: #ff3b30;
+    --clr-indigo: #5856d6;
+    --clr-orange: #ff9500;
+    --clr-green: #34c759;
+    --clr-purple: #af52de;
+    --clr-cyan: #5ac8fa;
+    --clr-pink: #ff2d55;
+    --clr-yellow: #facc15;
+    --clr-gray: #8e8e93;
+}
+
+body.dark-mode {
+    --bg-color: #0c0c0e;
+    --surface-color: #17171b;
+    --text-main: #ffffff;
+    --text-sec: #a0a0ab;
+    --border-color: #252529;
+    --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 5px 15px rgba(0, 0, 0, 0.4);
+    --primary-gradient: linear-gradient(135deg, #003166 0%, #007aff 100%);
+}
+
+html {
+    scroll-behavior: smooth;
+    user-select: none;
+    transition: background-color var(--transition-speed);
 }
 
 * {
@@ -26,11 +53,7 @@
     box-sizing: border-box;
     font-family: Montserrat, sans-serif;
     line-height: 1.3;
-}
-
-html {
-    scroll-behavior: smooth;
-    user-select: none;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
 a {
@@ -49,6 +72,7 @@ body {
     align-content: stretch;
     background-color: var(--bg-color);
     color: var(--text-main);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
 .mainContainer2 {
@@ -353,7 +377,7 @@ header #vehicleStatusSVG {
     letter-spacing: -0.2px;
 }
 
-/* Sub Menus Containers */
+/* Shared Menu Styles */
 #menu1,
 #menu2,
 #menu3,
@@ -435,6 +459,8 @@ header #vehicleStatusSVG {
     box-shadow: var(--card-shadow);
     border: 1px solid var(--border-color);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+    /* Fix for shadow rendering */
 }
 
 .error-card {
@@ -443,10 +469,6 @@ header #vehicleStatusSVG {
     align-items: center;
     padding: 16px 20px;
     gap: 16px;
-}
-
-.error-card:active {
-    transform: scale(0.98);
 }
 
 .error-card .icon {
@@ -515,14 +537,14 @@ header #vehicleStatusSVG {
 
 /* Theme: Live Data (Blue) */
 #dataBoxLiveData .live-card {
-    border-left: 5px solid #007aff;
-    background: linear-gradient(135deg, #ffffff 70%, #f0f7ff 100%);
+    border-left: 5px solid #007aff !important;
+    background: var(--surface-color);
 }
 
 /* Theme: Freeze Frame (Indigo) */
 .freeze-dashboard .live-card {
-    border-left: 5px solid #5856d6;
-    background: linear-gradient(135deg, #ffffff 70%, #f5f4ff 100%);
+    border-left: 5px solid #5856d6 !important;
+    background: var(--surface-color);
 }
 
 .live-card .unit {
@@ -546,12 +568,8 @@ header #vehicleStatusSVG {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5));
+    background: transparent;
     pointer-events: none;
-}
-
-.live-card:active {
-    transform: scale(0.97);
 }
 
 .live-card .label {
@@ -795,79 +813,73 @@ div[id^="menu"] .btnArea a {
     position: relative;
 }
 
-/* Vehicle Info Theme Variants */
-.info-vin {
-    border-left: 5px solid #007aff !important;
-    background: linear-gradient(to right, #ffffff, #f0f7ff) !important;
+/* Info Cards - Dynamic Color Theming */
+.info-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    overflow: hidden;
+    position: relative;
+    border-left: 5px solid var(--accent-clr, var(--primary-color)) !important;
+    background: var(--surface-color) !important;
 }
 
-.info-vin .icon-box {
-    color: #007aff;
-    background: rgba(0, 122, 255, 0.1);
+.info-card .icon-box {
+    color: var(--accent-clr, var(--primary-color));
+    background: var(--accent-soft-bg, rgba(0, 122, 255, 0.1));
+}
+
+.info-vin {
+    --accent-clr: var(--clr-blue);
+    --accent-soft-bg: rgba(0, 122, 255, 0.1);
+    --accent-gradient: #f0f7ff;
 }
 
 .info-id {
-    border-left: 5px solid #5856d6 !important;
-    background: linear-gradient(to right, #ffffff, #f5f4ff) !important;
-}
-
-.info-id .icon-box {
-    color: #5856d6;
-    background: rgba(88, 86, 214, 0.1);
+    --accent-clr: var(--clr-indigo);
+    --accent-soft-bg: rgba(88, 86, 214, 0.1);
+    --accent-gradient: #f5f4ff;
 }
 
 .info-version {
-    border-left: 5px solid #af52de !important;
-    background: linear-gradient(to right, #ffffff, #fcf5ff) !important;
-}
-
-.info-version .icon-box {
-    color: #af52de;
-    background: rgba(175, 82, 222, 0.1);
+    --accent-clr: var(--clr-purple);
+    --accent-soft-bg: rgba(175, 82, 222, 0.1);
+    --accent-gradient: #fcf5ff;
 }
 
 .info-pids {
-    border-left: 5px solid #5ac8fa !important;
-    background: linear-gradient(to right, #ffffff, #f2fcff) !important;
-}
-
-.info-pids .icon-box {
-    color: #5ac8fa;
-    background: rgba(90, 200, 250, 0.1);
+    --accent-clr: var(--clr-cyan);
+    --accent-soft-bg: rgba(90, 200, 250, 0.1);
+    --accent-gradient: #f2fcff;
 }
 
 .info-freeze {
-    border-left: 5px solid #ff9500 !important;
-    background: linear-gradient(to right, #ffffff, #fff9f0) !important;
-}
-
-.info-freeze .icon-box {
-    color: #ff9500;
-    background: rgba(255, 149, 0, 0.1);
+    --accent-clr: var(--clr-orange);
+    --accent-soft-bg: rgba(255, 149, 0, 0.1);
+    --accent-gradient: #fff9f0;
 }
 
 .info-support {
-    border-left: 5px solid #ff2d55 !important;
-    background: linear-gradient(to right, #ffffff, #fff0f3) !important;
-}
-
-.info-support .icon-box {
-    color: #ff2d55;
-    background: rgba(255, 45, 85, 0.1);
+    --accent-clr: var(--clr-pink);
+    --accent-soft-bg: rgba(255, 45, 85, 0.1);
+    --accent-gradient: #fff0f3;
 }
 
 .info-speed {
-    border-left: 5px solid #ff9500 !important;
-    background: linear-gradient(to right, #ffffff, #fff9f0) !important;
+    --accent-clr: var(--clr-orange);
+    --accent-soft-bg: rgba(255, 149, 0, 0.1);
+    --accent-gradient: #fff9f0;
 }
 
-.info-speed .icon-box {
-    color: #ff9500;
-    background: rgba(255, 149, 0, 0.1);
-}
-
-.info-card:active {
-    transform: scale(0.98);
+body.dark-mode .info-vin,
+body.dark-mode .info-id,
+body.dark-mode .info-version,
+body.dark-mode .info-pids,
+body.dark-mode .info-freeze,
+body.dark-mode .info-support,
+body.dark-mode .info-speed {
+    --accent-gradient: rgba(255, 255, 255, 0.02);
 }
 
 .info-card .left-content {
@@ -936,7 +948,7 @@ div[id^="menu"] .btnArea a {
 /* Category Theming */
 .card-protocol {
     border-left: 6px solid #007aff !important;
-    background: linear-gradient(to bottom right, #ffffff, #f0f7ff) !important;
+    background: var(--surface-color) !important;
 }
 
 .card-protocol h1 svg {
@@ -945,7 +957,7 @@ div[id^="menu"] .btnArea a {
 
 .card-parameters {
     border-left: 6px solid #5856d6 !important;
-    background: linear-gradient(to bottom right, #ffffff, #f5f4ff) !important;
+    background: var(--surface-color) !important;
 }
 
 .card-parameters h1 svg {
@@ -954,7 +966,7 @@ div[id^="menu"] .btnArea a {
 
 .card-network {
     border-left: 6px solid #34c759 !important;
-    background: linear-gradient(to bottom right, #ffffff, #f2fff5) !important;
+    background: var(--surface-color) !important;
 }
 
 .card-network h1 svg {
@@ -963,7 +975,7 @@ div[id^="menu"] .btnArea a {
 
 .card-system {
     border-left: 6px solid #ff3b30 !important;
-    background: linear-gradient(to bottom right, #ffffff, #fff2f1) !important;
+    background: var(--surface-color) !important;
 }
 
 .card-system h1 svg {
@@ -972,7 +984,7 @@ div[id^="menu"] .btnArea a {
 
 .card-appearance {
     border-left: 6px solid #facc15 !important;
-    background: linear-gradient(to bottom right, #ffffff, #fffcf3) !important;
+    background: var(--surface-color) !important;
 }
 
 .card-appearance h1 svg {
@@ -991,7 +1003,70 @@ div[id^="menu"] .btnArea a {
 }
 
 body.dark-mode .toggle-row {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .card,
+body.dark-mode .live-card,
+body.dark-mode .error-card,
+body.dark-mode .info-card,
+body.dark-mode .speed-card,
+body.dark-mode .timer-card,
+body.dark-mode .statusBox,
+body.dark-mode #menu6 .selectPID_Boxes .box {
+    background: var(--surface-color) !important;
+    border-color: var(--border-color);
+}
+
+body.dark-mode .live-card .label,
+body.dark-mode .info-card .label,
+body.dark-mode .speed-header,
+body.dark-mode #menu6 .row h2 {
+    color: var(--text-sec);
+}
+
+body.dark-mode .timer-display {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-main);
+}
+
+body.dark-mode .timer-btn {
+    background: var(--surface-color);
+}
+
+body.dark-mode .timer-btn svg {
+    filter: brightness(1.2);
+}
+
+body.dark-mode #menu6 .row p {
     background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
+body.dark-mode #menu6 input,
+body.dark-mode #menu6 select {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+body.dark-mode #menu6 .radioBtns {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-color);
+}
+
+body.dark-mode #menu6 .radioBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .savedBox {
+    background: linear-gradient(135deg, var(--surface-color) 0%, #1a221d 100%) !important;
+    border-color: var(--border-color);
+}
+
+body.dark-mode .savedBox h1 {
+    color: var(--text-main);
 }
 
 .toggle-text h2 {
@@ -1292,7 +1367,7 @@ input:checked+.slider:before {
     margin: 20px;
     width: 90%;
     max-width: 360px;
-    background-color: var(--surface-color);
+    background: linear-gradient(135deg, var(--surface-color) 0%, #fafff8 100%);
     padding: 32px 24px;
     border-radius: var(--border-rad);
     text-align: center;
@@ -1404,48 +1479,62 @@ input:checked+.slider:before {
     pointer-events: none;
 }
 
+/* Status Boxes - Modular Styling */
 #statusBoxLiveData,
 #statusBoxErrorCodes,
 #statusBoxFreezeFrame,
 #statusBoxSpeedTest {
-    background: rgba(0, 0, 0, 0.05);
-    border-left: 5px solid #ccc;
+    background: var(--surface-color);
+    border-left: 6px solid var(--status-clr, #ccc);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+    background: var(--surface-color);
 }
 
 #statusBoxLiveData {
-    background: rgba(0, 122, 255, 0.05);
-    border-left-color: #007aff;
-}
-
-#statusLiveData {
-    color: #007aff;
+    --status-clr: var(--clr-blue);
+    --status-bg-soft: rgba(0, 122, 255, 0.1);
 }
 
 #statusBoxErrorCodes {
-    background: rgba(255, 59, 48, 0.05);
-    border-left-color: #ff3b30;
-}
-
-#statusErrorCodes {
-    color: #ff3b30;
+    --status-clr: var(--clr-red);
+    --status-bg-soft: rgba(255, 59, 48, 0.1);
 }
 
 #statusBoxFreezeFrame {
-    background: rgba(88, 86, 214, 0.05);
-    border-left-color: #5856d6;
-}
-
-#statusFreezeFrame {
-    color: #5856d6;
+    --status-clr: var(--clr-indigo);
+    --status-bg-soft: rgba(88, 86, 214, 0.1);
 }
 
 #statusBoxSpeedTest {
-    background: rgba(255, 149, 0, 0.05);
-    border-left-color: #ff9500;
+    --status-clr: var(--clr-orange);
+    --status-bg-soft: rgba(255, 149, 0, 0.1);
+}
+
+body.dark-mode #statusBoxLiveData,
+body.dark-mode #statusBoxErrorCodes,
+body.dark-mode #statusBoxFreezeFrame,
+body.dark-mode #statusBoxSpeedTest {
+    background: var(--surface-color) !important;
+}
+
+#statusLiveData {
+    color: var(--clr-blue);
+}
+
+#statusErrorCodes {
+    color: var(--clr-red);
+}
+
+#statusFreezeFrame {
+    color: var(--clr-indigo);
 }
 
 #statusSpeedTest {
-    color: #ff9500;
+    color: var(--clr-orange);
 }
 
 .info-card.modern {

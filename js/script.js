@@ -624,5 +624,31 @@ function handleWebSocketMessage(wsMessage) {
 
 }
 
+// Dark Mode Toggle Logic
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+function applyTheme(theme) {
+    if (theme === "dark") {
+        document.body.classList.add("dark-mode");
+        if (darkModeToggle) darkModeToggle.checked = true;
+    } else {
+        document.body.classList.remove("dark-mode");
+        if (darkModeToggle) darkModeToggle.checked = false;
+    }
+}
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem("theme") || "light";
+applyTheme(savedTheme);
+
+if (darkModeToggle) {
+    darkModeToggle.addEventListener("change", () => {
+        const theme = darkModeToggle.checked ? "dark" : "light";
+        applyTheme(theme);
+        localStorage.setItem("theme", theme);
+    });
+}
+
+
 setMessageHandler(handleWebSocketMessage);
 InitWebSocket();
