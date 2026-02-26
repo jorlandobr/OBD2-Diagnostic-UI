@@ -7,6 +7,16 @@
 
 OBD2-Diagnostic-UI is a premium, high-performance web interface designed for real-time vehicle diagnostics. Optimized for embedded web servers (ESP32, ESP8266, STM32), it provides a sleek, responsive, and professional dashboard for monitoring vehicle health, reading/clearing fault codes, and performance testing.
 
+You can also see my other car projects:
+1. [Тhis](https://github.com/muki01/I-K_Bus) project is for BMW with I/K bus system. 
+2. [Тhis](https://github.com/muki01/OBD2_CAN_Bus_Reader) project is for Cars with CAN Bus.
+3. [Тhis](https://github.com/muki01/OBD2_K-line_Reader) project is for Cars with ISO9141 and ISO14230 protocols.
+4. [Тhis](https://github.com/muki01/OBD2_CAN_Bus_Library) is my OBD2 CAN Bus Communication Library for Arduino IDE.
+5. [Тhis](https://github.com/muki01/OBD2_KLine_Library) is my OBD2 K-Line Communication Library for Arduino IDE.
+6. [Тhis](https://github.com/muki01/VAG_KW1281) project is for VAG Cars with KW1281 protocol.
+7. [This](https://github.com/muki01/OBD2-Diagnostic-UI) is Web based UI for OBD2 Diagnostic
+<!--8. [Тhis](https://github.com/muki01/I-K_Bus_Library) is my I/K Bus Communication Library for Arduino IDE.-->
+
 ## 📱 Interface Preview
 <img width=90% src="https://github.com/user-attachments/assets/5a3e0540-b56d-4c3a-a0bf-8c1affcda00c" />
 <img width=90% src="https://github.com/user-attachments/assets/8544df16-cf62-4a80-8f19-cbd0daadfb51" />
