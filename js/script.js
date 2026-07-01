@@ -3,6 +3,19 @@ import { errorCodes } from "./errorCodes.js";
 
 let page = 0;
 
+// Splash Screen Logic
+window.addEventListener("load", () => {
+    const splashScreen = document.getElementById("splash-screen");
+    if (splashScreen) {
+        setTimeout(() => {
+            splashScreen.classList.add("fade-out");
+            setTimeout(() => {
+                splashScreen.style.display = "none";
+            }, 600);
+        }, 3000); // 3 seconds display
+    }
+});
+
 const wsStatusSVG = document.getElementById("wsStatusSVG");
 const vehicleStatusSVG = document.getElementById("vehicleStatusSVG");
 
